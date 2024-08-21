@@ -384,7 +384,8 @@ function send(url, jobName, jobStatus, jobSteps, jobMatrix, channel, message, op
         const footer = footerTemplate(data);
         const filteredBlocks = [];
         for (const block of (opts === null || opts === void 0 ? void 0 : opts.blocks) || []) {
-            const block_if = (block === null || block === void 0 ? void 0 : block.if) || 'always()';
+            const blockIfTemplate = handlebars_1.default.compile((block === null || block === void 0 ? void 0 : block.if) || 'always()');
+            const block_if = blockIfTemplate(data).toString();
             if (block_if === 'always()' || block_if.startsWith(jobStatus.toLowerCase())) {
                 /* eslint-disable @typescript-eslint/no-unused-vars */
                 const { if: string } = block, blockWithoutIf = __rest(block, ["if"]);
