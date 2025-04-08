@@ -11,12 +11,19 @@ Handlebars.registerHelper('loud', function (aString) {
   return aString.toUpperCase()
 })
 
+Handlebars.registerHelper('httpsToHttp', function (url) {
+  if (typeof url === 'string') {
+    return url.replace(/^https:\/\//, 'http://');
+  }
+  return url;
+})
+
 Handlebars.registerHelper('pluralize', (items, ...args) => {
   items = items ?? []
   const count = typeof items === 'number' ? items : items.length
   const singular = args.length === 1 ? 'item' : args[0]
   const plural = args.length === 3 ? args[1] : `${singular}s`
-
+  
   if (count === 0) return `no ${plural}`
   if (count === 1) return `1 ${singular}`
   return `${count} ${plural}`
