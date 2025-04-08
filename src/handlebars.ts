@@ -7,6 +7,10 @@ Handlebars.registerHelper('truncate', (text, size) => text.substring(0, size))
 
 Handlebars.registerHelper('default', (want, fallback) => (want || want === 0 || want === false ? want : fallback))
 
+Handlebars.registerHelper('loud', function (aString) {
+  return aString.toUpperCase()
+})
+
 Handlebars.registerHelper('pluralize', (items, ...args) => {
   items = items ?? []
   const count = typeof items === 'number' ? items : items.length
