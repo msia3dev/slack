@@ -23,6 +23,15 @@ const handlebars_1 = __importDefault(__nccwpck_require__(7492));
 handlebars_1.default.registerHelper('json', value => new handlebars_1.default.SafeString(JSON.stringify(value)));
 handlebars_1.default.registerHelper('truncate', (text, size) => text.substring(0, size));
 handlebars_1.default.registerHelper('default', (want, fallback) => (want || want === 0 || want === false ? want : fallback));
+handlebars_1.default.registerHelper('loud', function (aString) {
+    return aString.toUpperCase();
+});
+handlebars_1.default.registerHelper('httpsToHttp', function (url) {
+    if (typeof url === 'string') {
+        return url.replace(/^https:\/\//, 'http://');
+    }
+    return url;
+});
 handlebars_1.default.registerHelper('pluralize', (items, ...args) => {
     items = items !== null && items !== void 0 ? items : [];
     const count = typeof items === 'number' ? items : items.length;
